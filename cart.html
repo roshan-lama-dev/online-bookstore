@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+
     <title>Cart</title>
   </head>
   <body>
@@ -22,5 +23,46 @@
         </ul>
       </div>
     </div>
+
+    <div class="container">
+      <div class="bookdetails-container">
+        <div class="bookDetails">
+          <div class="isbn">
+            <p class="p-design">ISBN:</p>
+            <p id="isbn"></p>
+          </div>
+          <div class="bookTitle">
+            <p class="p-design">Title:</p>
+            <p id="book-title"></p>
+          </div>
+          <div class="author">
+            <p class="p-design">Author:</p>
+            <p id="book-author"></p>
+          </div>
+          <div class="price">
+            <p class="p-design">Price:</p>
+            <p id="book-price"></p>
+          </div>
+          <div class="description">
+            <p class="p-design">Description:</p>
+            <p id="book-description"></p>
+          </div>
+          <div class="category">
+            <p class="p-design">Category:</p>
+            <p id="book-category"></p>
+          </div>
+
+          <button id="remove-cart-btn">Remove book</button>
+        </div>
+
+        <button onclick="clearCart()">Clear Cart</button>
+      </div>
+    </div>
+
+    <button id="displayBtn" onclick="displaySelectedBooks()">
+      Display the selected Books
+    </button>
+
+    <script src="main.js"></script>
   </body>
 </html>

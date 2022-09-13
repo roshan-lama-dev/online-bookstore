@@ -2,6 +2,7 @@
 
 const book_library = [
   {
+    id: 1,
     iSBN: "1-903282-25-X",
     book_title: "Harry Pooter",
     author: "J.K Rowling",
@@ -11,6 +12,7 @@ const book_library = [
     category: "Fiction",
   },
   {
+    id: 2,
     iSBN: "9781472139962",
     book_title: "Mindset ",
     author: "Carol Dweck",
@@ -20,6 +22,7 @@ const book_library = [
     category: "Self-Help",
   },
   {
+    id: 3,
     iSBN: "9781861972781",
     book_title: "The 48 Laws of Power",
     author: "Robert Greene",
@@ -29,6 +32,7 @@ const book_library = [
     category: "Society",
   },
   {
+    id: 4,
     iSBN: "1847941834",
     book_title:
       "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
@@ -39,6 +43,7 @@ const book_library = [
     category: "Self-Help",
   },
   {
+    id: 5,
     iSBN: "9780307338402",
     book_title:
       "Secrets of Mental Math: The Mathemagician's Guide to Lightning Calculation and Amazing Math Tricks",
@@ -49,6 +54,7 @@ const book_library = [
     category: "Mathematics",
   },
   {
+    id: 6,
     iSBN: "1119457890",
     book_title: "Beginning Programming with Python for Dummies",
     author: "John Paul Mueller",
@@ -58,6 +64,7 @@ const book_library = [
     category: "Computer",
   },
   {
+    id: 7,
     iSBN: "1119527074",
     book_title: "SQL for Dummies",
     author: "Allen G. Taylor",
@@ -67,6 +74,7 @@ const book_library = [
     category: "Programming",
   },
   {
+    id: 8,
     iSBN: "Encyclopedia of Database Systems",
     book_title: "Encyclopedia of Database Systems",
     author: "M. Tamer Özsu",
@@ -75,6 +83,7 @@ const book_library = [
     category: "Computer",
   },
   {
+    id: 9,
     iSBN: "1584880902",
     book_title: "Handbook of graph theory",
     author: "=Jonathan L. Gross",
@@ -84,6 +93,7 @@ const book_library = [
     category: "Mathematics",
   },
   {
+    id: 10,
     iSBN: "9780387310732",
     book_title: "Pattern Recognition and Machine Learning",
     author: "Christopher M. Bishop",
@@ -94,39 +104,89 @@ const book_library = [
   },
 ];
 
-let str = "";
+//Creating an array for the selected books
+var selectedBooks = new Array();
 
-book_library.forEach((item) => {
-  str += `
-  <div class="bookdetails-container">
-  <div class="bookDetails">
-    <div class="isbn">
-      <p>ISBN:</p>
-      <p>${item.iSBN}</p>
-    </div>
-    <div class="bookTitle">
-      <p>Title:</p>
-      <p>${item.book_title}</p>
-    </div>
-    <div class="author">
-      <p>Author:</p>
-      <p>${item.author}</p>
-    </div>
-    <div class="price">
-      <p>Price:</p>
-      <p>${item.price}</p>
-    </div>
-    <div class="description">
-      <p>Description:</p>
-      <p>${item.description}</p>
-    </div>
-    <div class="category">
-      <p>Category:</p>
-      <p>${item.category}</p>
-    </div>
-  </div>
-  </div>`;
-});
+//Creating an array for the book information gained from the local storage
+var booksFromLocalStorage = new Array();
 
-// console.log(str, "after loop");
-document.getElementById("display").innerHTML = str;
+var bookIdFromStorage;
+
+const displayBookList = () => {
+  let str = " ";
+
+  book_library.map((item, i) => {
+    str += `
+    <div class="bookdetails-container">
+    <div class="bookDetails">
+      <div class="isbn">
+        <p  class="p-design">ISBN:</p>
+        <p>${item.iSBN}</p>
+      </div>
+      <div class="bookTitle">
+        <p  class="p-design">Title:</p>
+        <p>${item.book_title}</p>
+      </div>
+      <div class="author">
+        <p  class="p-design">Author:</p>
+        <p>${item.author}</p>
+      </div>
+      <div class="price">
+        <p  class="p-design">Price:</p>
+        <p>${item.price}</p>
+      </div>
+      <div class="description">
+        <p  class="p-design">Description:</p>
+        <p>${item.description}</p>
+      </div>
+      <div class="category">
+        <p  class="p-design">Category:</p>
+        <p>${item.category}</p>
+      </div>
+  
+      <div class="button-cart">
+
+      //can you pass the whole array from onclick
+      <button class="cart-btn" onclick="addToStorage(${item.id})">Add to cart</button>
+      </div>
+    
+    </div>
+    </div>`;
+  });
+  document.getElementById("display").innerHTML = str;
+};
+
+displayBookList();
+
+function addToStorage(id) {
+  // alert(id);
+
+  //append the selected ids into the new array;
+
+  selectedBooks.push(id);
+
+  //  alert(selectedBooks);
+
+  //convert the updated selected book array into text
+  let selectedBooks_text = selectedBooks.toString();
+
+  //update the selected books to the local storage
+  if (typeof Storage !== "undefined") {
+    localStorage.setItem("selectedBooks", selectedBooks_text);
+    alert(selectedBooks_text);
+  } else {
+    alert("Cant support");
+  }
+}
+
+document.getElementById("car");
+
+function displaySelectedBooks() {
+  //get the local storage
+  if (typeof (Storage !== "undefined")) {
+    bookIdFromStorage = localStorage.getItem("selectedBooks");
+  }
+  //push the ids of the books into array
+
+  alert(bookIdFromStorage);
+}

@@ -9,6 +9,10 @@ body {
   background-size: cover;
   font-size: 1rem;
 }
+.container {
+  width: 80%;
+  padding: 10px;
+}
 
 .herosection {
   background: url(img/mainimage.jpg) no-repeat center center;
@@ -75,7 +79,10 @@ body {
 
 .bookDetails {
   /* background: red; */
-  border: 1px solid black;
+  background: rgba(128, 128, 128, 0.505);
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px 5px rgba(24, 21, 21, 0.504);
   padding: 10px;
   margin: 20px;
   width: 100%;
@@ -84,12 +91,38 @@ body {
 .bookDetails > div {
   /* background: blue; */
   display: flex;
+  padding: 10px;
   flex-direction: row;
 }
+/* .bookDetails > div > p {
+  
+} */
+.p-design {
+  /* font-size: 25px; */
+  font-weight: bolder;
+}
 
+.cart-btn {
+  padding: 10px;
+  /* text-align: end; */
+  align-items: center;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px 5px rgba(24, 21, 21, 0.504);
+  border: none;
+}
+
+.button-cart {
+  display: flex;
+  justify-content: end;
+}
 /* give grid to display the items */
 .bookdetails-container {
+  padding: 10px;
   width: 400px;
+  /* height: 400px; */
   display: flex;
   flex-wrap: wrap;
   /* display: flex; */
@@ -190,4 +223,11 @@ body {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
+}
+
+#display {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-left: 150px;
 }
