@@ -104,6 +104,14 @@ const book_library = [
   },
 ];
 
+//Code to make the local storage take array as a value
+Storage.prototype.setObj = function (key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+Storage.prototype.getObj = function (key) {
+  return JSON.parse(this.getItem(key));
+};
+
 //Creating an array for the selected books
 var selectedBooks = new Array();
 
@@ -159,11 +167,12 @@ const displayBookList = () => {
 displayBookList();
 
 function addToStorage(id) {
-  // alert(id);
+  let newArr = [...selectedBooks];
 
   //append the selected ids into the new array;
+  newArr.push(id);
 
-  selectedBooks.push(id);
+  selectedBooks = newArr;
 
   //  alert(selectedBooks);
 
@@ -172,7 +181,10 @@ function addToStorage(id) {
 
   //update the selected books to the local storage
   if (typeof Storage !== "undefined") {
-    localStorage.setItem("selectedBooks", selectedBooks_text);
+    var booksinLocalStorage = localStorage.setObj(
+      "selectedBooks",
+      book_library[id - 1]
+    );
     alert(selectedBooks_text);
   } else {
     alert("Cant support");
@@ -184,9 +196,53 @@ document.getElementById("car");
 function displaySelectedBooks() {
   //get the local storage
   if (typeof (Storage !== "undefined")) {
-    bookIdFromStorage = localStorage.getItem("selectedBooks");
+    booksFromLocalStorage = localStorage.getObj("selectedBooks");
   }
   //push the ids of the books into array
 
-  alert(bookIdFromStorage);
+  console.log(booksFromLocalStorage);
+
+  let str = " ";
+
+  booksFromLocalStorage.map((item, i) => {
+    str += `
+    <div class="container" id="carDisplay">
+    <div class="bookdetails-container">
+      <div class="bookDetails">
+        <div class="isbn">
+          <p class="p-design">ISBN:</p>
+          <p>${item.iSBN}</p>
+        </div>
+        <div class="bookTitle">
+          <p class="p-design">Title:</p>
+          <p id="book-title"></p>
+        </div> 
+        <div class="author">
+          <p class="p-design">Author:</p>
+          <p id="book-author"></p>
+        </div>
+        <div class="price">
+          <p class="p-design">Price:</p>
+          <p id="book-price"></p>
+        </div>
+        <div class="description">
+          <p class="p-design">Description:</p>
+          <p id="book-description"></p>
+        </div>
+        <div class="category">
+          <p class="p-design">Category:</p>
+          <p id="book-category"></p>
+        </div>
+
+        <button id="remove-cart-btn">Remove book</button>
+      </div>
+
+      <button onclick="clearCart()">Clear Cart</button>
+    </div>
+  </div>`;
+  });
+
+  document.getElementById("carDisplay").innerHTML = str;
 }
+
+displaySelectedBooks();
