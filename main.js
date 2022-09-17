@@ -112,15 +112,20 @@ Storage.prototype.getObj = function (key) {
   return JSON.parse(this.getItem(key));
 };
 
+var quantity = 0;
+
+var cartqunatity;
 //Creating an array for the selected books
 var selectedBooks = new Array();
 
 //Creating an array for the book information gained from the local storage
-var booksFromLocalStorage = new Array();
 
+var booksFromLocalStorage = new Array();
+var booksinLocalStorage = new Array();
 var bookIdFromStorage;
 
 const displayBookList = () => {
+  console.log(book_library.length);
   let str = " ";
 
   book_library.map((item, i) => {
@@ -154,7 +159,6 @@ const displayBookList = () => {
   
       <div class="button-cart">
 
-      //can you pass the whole array from onclick
       <button class="cart-btn" onclick="addToStorage(${item.id})">Add to cart</button>
       </div>
     
@@ -167,82 +171,33 @@ const displayBookList = () => {
 displayBookList();
 
 function addToStorage(id) {
-  let newArr = [...selectedBooks];
-
-  //append the selected ids into the new array;
-  newArr.push(id);
-
-  selectedBooks = newArr;
-
-  //  alert(selectedBooks);
-
-  //convert the updated selected book array into text
-  let selectedBooks_text = selectedBooks.toString();
-
-  //update the selected books to the local storage
   if (typeof Storage !== "undefined") {
-    var booksinLocalStorage = localStorage.setObj(
+    booksinLocalStorage = localStorage.setObj(
       "selectedBooks",
       book_library[id - 1]
     );
-    alert(selectedBooks_text);
+    if (localStorage.getItem("quantitybooks") == null) {
+      localStorage.setItem("quantitybooks", quantity + 1);
+    } else if (localStorage.getItem("qunatitybooks") !== null) {
+      localStorage.setItem("quantitybooks", quantity + 1);
+    }
+    //code for quantity
+
+    //alert(selectedBooks_text);
+    // console.log(booksinLocalStorage.length);
+
+    // displaySelectedBooks();
   } else {
     alert("Cant support");
   }
 }
 
-document.getElementById("car");
+// function displaySelectedBooks() {
+//   //get the local storage
+//   if (typeof (Storage !== "undefined")) {
+//     booksFromLocalStorage = localStorage.getObj("selectedBooks");
+//   }
+//   //push the ids of the books into array
 
-function displaySelectedBooks() {
-  //get the local storage
-  if (typeof (Storage !== "undefined")) {
-    booksFromLocalStorage = localStorage.getObj("selectedBooks");
-  }
-  //push the ids of the books into array
-
-  console.log(booksFromLocalStorage);
-
-  let str = " ";
-
-  booksFromLocalStorage.map((item, i) => {
-    str += `
-    <div class="container" id="carDisplay">
-    <div class="bookdetails-container">
-      <div class="bookDetails">
-        <div class="isbn">
-          <p class="p-design">ISBN:</p>
-          <p>${item.iSBN}</p>
-        </div>
-        <div class="bookTitle">
-          <p class="p-design">Title:</p>
-          <p id="book-title"></p>
-        </div> 
-        <div class="author">
-          <p class="p-design">Author:</p>
-          <p id="book-author"></p>
-        </div>
-        <div class="price">
-          <p class="p-design">Price:</p>
-          <p id="book-price"></p>
-        </div>
-        <div class="description">
-          <p class="p-design">Description:</p>
-          <p id="book-description"></p>
-        </div>
-        <div class="category">
-          <p class="p-design">Category:</p>
-          <p id="book-category"></p>
-        </div>
-
-        <button id="remove-cart-btn">Remove book</button>
-      </div>
-
-      <button onclick="clearCart()">Clear Cart</button>
-    </div>
-  </div>`;
-  });
-
-  document.getElementById("carDisplay").innerHTML = str;
-}
-
-displaySelectedBooks();
+//   console.log(booksFromLocalStorage);
+// }

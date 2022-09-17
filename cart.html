@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="container" id="carDisplay">
+    <div class="display container" id="cartDisplay">
       <div class="bookdetails-container">
         <div class="bookDetails">
           <div class="isbn">
@@ -52,17 +52,20 @@
             <p id="book-category"></p>
           </div>
 
-          <button id="remove-cart-btn">Remove book</button>
+          <div class="removebtn">
+            <button onclick="removeBook()">Remove Book</button>
+          </div>
+
+          <div>
+            Quantity is:
+            <p id="quantity"></p>
+          </div>
         </div>
 
-        <button onclick="clearCart()">Clear Cart</button>
+        <button id="clear-cart-btn">Send Books</button>
       </div>
     </div>
 
-    <button id="displayBtn" onclick="displaySelectedBooks()">
-      Display the selected Books
-    </button>
-
-    <script src="main.js"></script>
+    <script src="cart.js"></script>
   </body>
 </html>

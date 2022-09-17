@@ -63,7 +63,18 @@ function checkInputs() {
     setSuccessFor(message);
   }
 
-  return true;
+  //Displaying the success message after the validation is true
+  if (username.value !== "" && messageValue !== "" && emailValue !== "") {
+    document.getElementById("successMsg").style.color = "green";
+    document.getElementById("successMsg").style.fontSize = "1rem";
+
+    document.getElementById("successMsg").innerHTML =
+      "Dear " +
+      username.value +
+      ", Thank you for your inquiry. One of our team members will be in touch with you shortly";
+  } else {
+    // alert("Fulfill the required value");
+  }
 }
 
 //Function to display the error message
@@ -82,19 +93,19 @@ function setSuccessFor(input) {
 }
 
 //Success Message disaplyed after validation
-function successMsg() {
-  if (username.value !== "") {
-    document.getElementById("successMsg").style.color = "green";
-    document.getElementById("successMsg").style.fontSize = "1rem";
+// function successMsg() {
+//   if (username.value !== "" && messageValue !== "" && emailValue !== "") {
+//     document.getElementById("successMsg").style.color = "green";
+//     document.getElementById("successMsg").style.fontSize = "1rem";
 
-    document.getElementById("successMsg").innerHTML =
-      "Dear " +
-      username.value +
-      ", Thank you for your inquiry. One of our team members will be in touch with you shortly";
-  } else {
-    alert("Fulfill the required value");
-  }
-}
+//     document.getElementById("successMsg").innerHTML =
+//       "Dear " +
+//       username.value +
+//       ", Thank you for your inquiry. One of our team members will be in touch with you shortly";
+//   } else {
+//     // alert("Fulfill the required value");
+//   }
+// }
 
 //Function to check is the entered email is valid or not
 
