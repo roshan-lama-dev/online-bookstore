@@ -118,8 +118,12 @@ var cartqunatity;
 //Creating an array for the selected books
 var selectedBooks = new Array();
 
+!localStorage.getItem("cartItems") && localStorage.setItem("cartItems", []);
+
 //Creating an array for the book information gained from the local storage
 
+//Creating an array to append all the array selected from the cart
+var appendCartArray = new Array();
 var booksFromLocalStorage = new Array();
 var booksinLocalStorage = new Array();
 var bookIdFromStorage;
@@ -159,7 +163,7 @@ const displayBookList = () => {
   
       <div class="button-cart">
 
-      <button class="cart-btn" onclick="addToStorage(${item.id})">Add to cart</button>
+      <button class="cart-btn" onclick="addToStorage(${i});">Add to cart</button>
       </div>
     
     </div>
@@ -170,26 +174,62 @@ const displayBookList = () => {
 
 displayBookList();
 
-function addToStorage(id) {
-  if (typeof Storage !== "undefined") {
-    booksinLocalStorage = localStorage.setObj(
-      "selectedBooks",
-      book_library[id - 1]
-    );
-    if (localStorage.getItem("quantitybooks") == null) {
-      localStorage.setItem("quantitybooks", quantity + 1);
-    } else if (localStorage.getItem("qunatitybooks") !== null) {
-      localStorage.setItem("quantitybooks", quantity + 1);
-    }
-    //code for quantity
+function addToStorage(i) {
+  let isFound = false;
+  const item = book_library[i];
+  console.log(item);
+  // console.log(localStorage.getItem("cartItems"));
+  let fromLocalStoreage = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    //alert(selectedBooks_text);
-    // console.log(booksinLocalStorage.length);
+  fromLocalStoreage = fromLocalStoreage.length
+    ? fromLocalStoreage.map((book) => {
+        if (book.id === item.id) {
+          book.cartQty = book.cartQty + 1;
+          isFound = true;
+          return book;
+        }
+      })
+    : fromLocalStoreage;
 
-    // displaySelectedBooks();
-  } else {
-    alert("Cant support");
+  if (!fromLocalStoreage.length || !isFound) {
+    item.cartQty = 1;
+    fromLocalStoreage.push(item);
   }
+  console.log(fromLocalStoreage);
+  localStorage.setItem("cartItems", JSON.stringify(fromLocalStoreage));
+  // if (booksinLocalStorage.length === 0) {
+  //   if (typeof Storage !== "undefined") {
+  //     booksinLocalStorage = localStorage.setObj(
+  //       "selectedBooks",
+  //       book_library[id - 1]
+  //     );
+  //     if (localStorage.getItem("quantitybooks") == null) {
+  //       localStorage.setItem("quantitybooks", quantity + 1);
+  //     } else if (localStorage.getItem("qunatitybooks") !== null) {
+  //       localStorage.setItem("quantitybooks", quantity + 1);
+  //     }
+  //   } else {
+  //     alert("Cant support");
+  //   }
+  // } else if (!booksinLocalStorage.length) {
+  //   if (typeof Storage !== "undefined") {
+  //     appendCartArray = booksinLocalStorage.concat(
+  //       localStorage.setObj("selectedBooks", book_library[id - 1])
+  //     );
+  //     localStorage.setObj("selectedBooks", appendCartArray);
+  //     if (localStorage.getItem("quantitybooks") == null) {
+  //       localStorage.setItem("quantitybooks", quantity + 1);
+  //     } else if (localStorage.getItem("qunatitybooks") !== null) {
+  //       localStorage.setItem("quantitybooks", quantity + 1);
+  //     }
+  //     //code for quantity
+  //     //alert(selectedBooks_text);
+  //     // console.log(booksinLocalStorage.length);
+  //     // displaySelectedBooks();
+  //   } else {
+  //     alert("Cant support");
+  //   }
+  // }
 }
 
 // function displaySelectedBooks() {

@@ -9,58 +9,52 @@ Storage.prototype.getObj = function (key) {
 //Creating an array for the book information gained from the local storage
 var booksFromLocalStorage = new Array();
 
-function displaySelectedBooks() {
-  //get the local storage
-  if (typeof (Storage !== "undefined")) {
-    booksFromLocalStorage = localStorage.getObj("selectedBooks");
+var bookquantityFromLocalStorage;
 
-    console.log(localStorage.getItem("quantitybooks"));
-  }
-  //push the ids of the books into array
-  console.log(booksFromLocalStorage);
+if (typeof (Storage !== "undefined")) {
+  booksFromLocalStorage = localStorage.getObj("selectedBooks");
 
-  document.getElementById("quantity").innerText =
-    localStorage.getItem("quantitybooks");
-  // document.getElementById("isbn").innerText=booksFromLocalStorage.
-  // let cartstr = " ";
-
-  // booksFromLocalStorage.map((item, i) => {
-  //   cartstr += `
-  //   <div class="bookdetails-container">
-  //   <div class="bookDetails">
-  //     <div class="isbn">
-  //       <p class="p-design">ISBN:</p>
-  //       <p>${getItem.book_title}</p>
-  //     </div>
-  //     <div class="bookTitle">
-  //       <p  class="p-design">Title:</p>
-  //       <p>${item.book_title}</p>
-  //     </div>
-  //     <div class="author">
-  //       <p  class="p-design">Author:</p>
-  //       <p>${item.author}</p>
-  //     </div>
-  //     <div class="price">
-  //       <p  class="p-design">Price:</p>
-  //       <p>${item.price}</p>
-  //     </div>
-  //     <div class="description">
-  //       <p  class="p-design">Description:</p>
-  //       <p>${item.description}</p>
-  //     </div>
-  //     <div class="category">
-  //       <p  class="p-design">Category:</p>
-  //       <p>${item.category}</p>
-  //     </div>
-
-  //   </div>
-  //   </div>`;
-  // });
-  // document.getElementById("cartDisplay").innerHTML = cartstr;
+  bookquantityFromLocalStorage = localStorage.getItem("quantitybooks");
 }
 
-const displayAddtoCartList = () => {
-  console.log(booksFromLocalStorage.length);
-};
+//Display the book details from the local storage in the HTML element
+function displaySelectedBooks() {
+  let str = "";
+}
+
+// getValueFromStorage();
 displaySelectedBooks();
 displayAddtoCartList();
+
+//remove book from the cart function
+function removeBook(id) {
+  localStorage.removeItem("selectedBooks");
+  localStorage.removeItem("quantitybooks");
+}
+
+//Remove all the books from the local storage
+function removeAllBooks() {
+  let text =
+    "Do you want to remove all the books from the cart !\nEither OK or Cancel.";
+  if (confirm(text) == true) {
+    localStorage.clear();
+    alert("The shopping cart is empty now");
+    displaySelectedBooks();
+  } else {
+    text = "You canceled!";
+  }
+}
+
+//Send the book list
+function sendBooks() {
+  alert("Btn0000");
+  if (booksFromLocalStorage.length == 0) {
+    alert(
+      "Your order cannot be processed as your shopping cart is empty. Please select at least one book"
+    );
+  } else if (booksFromLocalStorage.length !== 0) {
+    alert(
+      "“Thank you for your order. We have received it and will process your order soon"
+    );
+  }
+}

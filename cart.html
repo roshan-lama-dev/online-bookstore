@@ -51,18 +51,22 @@
             <p class="p-design">Category:</p>
             <p id="book-category"></p>
           </div>
-
+          <div class="quantity">
+            <p class="p-quantity">Qunatity:</p>
+            <p id="book-category"></p>
+            <p id="quantity"></p>
+          </div>
           <div class="removebtn">
             <button onclick="removeBook()">Remove Book</button>
           </div>
-
-          <div>
-            Quantity is:
-            <p id="quantity"></p>
-          </div>
         </div>
+        <div>
+          <button id="clear-cart-btn" onclick="sendBooks()">Send Books</button>
 
-        <button id="clear-cart-btn">Send Books</button>
+          <button id="removeallBook" onclick="removeAllBooks()">
+            Remove all the books from cart
+          </button>
+        </div>
       </div>
     </div>
 
