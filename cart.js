@@ -1,19 +1,15 @@
 //Code to make the local storage take array as a value
 
 //Creating an array for the book information gained from the local storage
-var booksFromLocalStorage = [];
 
-var bookquantityFromLocalStorage;
-
+booksFromLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
 //Display the book details from the local storage in the HTML element
 function displaySelectedBooks() {
-  if (!booksFromLocalStorage.length === 0) {
-    let str = "";
-    if (typeof (Storage !== "undefined")) {
-      booksFromLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
-      console.log(booksFromLocalStorage);
+  let str = "";
+  if (typeof (Storage !== "undefined")) {
+    console.log(booksFromLocalStorage);
 
-      str += ` <table>
+    str += ` <table>
 <thead>
   <th>ISBN</th>
   <th>Title</th>
@@ -26,8 +22,10 @@ function displaySelectedBooks() {
 </thead>
 <tbody>`;
 
-      booksFromLocalStorage.map((item, i) => {
-        str += ` <tr >
+    booksFromLocalStorage.map((item, i) => {
+      var total = item.price * item.cartQty;
+      console.log(total.toString);
+      str += ` <tr >
 <td>${item.iSBN}</td>
 <td>${item.book_title}</td>
 <td>${item.author}</td>
@@ -35,27 +33,24 @@ function displaySelectedBooks() {
 <td>${item.description}</td>
 <td>${item.category}</td>
 <td>${item.cartQty}</td>
+<td>${"$" + total}</td>
 
 </tr>`;
-      });
+    });
 
-      str += `</tbody>
+    str += `</tbody>
     </table>`;
-      console.log("was here", str);
+    console.log("was here", str);
 
-      document.getElementById("cartDisplay").innerHTML = str;
-    }
-  } else {
-    alert("The local storage is empty");
+    document.getElementById("cartDisplay").innerHTML = str;
   }
 }
-
 // getValueFromStorage();
 displaySelectedBooks();
 
 //remove book from the cart function
 function removeBook(id) {
-  localStorage.removeItem("cartItems");
+  localStorage.removeItem();
 }
 
 //Remove all the books from the local storage
@@ -65,7 +60,7 @@ function removeAllBooks() {
   if (confirm(text) == true) {
     localStorage.clear();
     alert("The shopping cart is empty now");
-    displaySelectedBooks();
+    location.reload();
   } else {
     text = "You canceled!";
   }
@@ -81,5 +76,7 @@ function sendBooks() {
     alert(
       "“Thank you for your order. We have received it and will process your order soon"
     );
+    localStorage.clear();
+    location.reload();
   }
 }
