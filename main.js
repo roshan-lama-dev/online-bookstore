@@ -104,14 +104,6 @@ const book_library = [
   },
 ];
 
-//Code to make the local storage take array as a value
-Storage.prototype.setObj = function (key, obj) {
-  return this.setItem(key, JSON.stringify(obj));
-};
-Storage.prototype.getObj = function (key) {
-  return JSON.parse(this.getItem(key));
-};
-
 var quantity = 0;
 
 var cartqunatity;
@@ -177,19 +169,20 @@ displayBookList();
 function addToStorage(i) {
   let isFound = false;
   const item = book_library[i];
-  console.log(item);
-  // console.log(localStorage.getItem("cartItems"));
-  let fromLocalStoreage = JSON.parse(localStorage.getItem("cartItems")) || [];
-
+  const arg = localStorage.getItem("cartItems");
+  console.log(arg);
+  let fromLocalStoreage = JSON.parse(arg) || [];
+  console.log(fromLocalStoreage);
   fromLocalStoreage = fromLocalStoreage.length
     ? fromLocalStoreage.map((book) => {
         if (book.id === item.id) {
           book.cartQty = book.cartQty + 1;
           isFound = true;
-          return book;
         }
+
+        return book;
       })
-    : fromLocalStoreage;
+    : [];
 
   if (!fromLocalStoreage.length || !isFound) {
     item.cartQty = 1;

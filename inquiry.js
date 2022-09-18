@@ -20,7 +20,7 @@ function myOnBlurFunction() {
 //Submit Button OnClickListener
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  //Finction to vlaidate the input fields
+  //Function to vlaidate the input fields
   checkInputs();
 
   //Function to display the success message
@@ -64,7 +64,12 @@ function checkInputs() {
   }
 
   //Displaying the success message after the validation is true
-  if (username.value !== "" && messageValue !== "" && emailValue !== "") {
+  if (
+    username.value !== "" &&
+    messageValue !== "" &&
+    emailValue !== "" &&
+    isEmail(emailValue)
+  ) {
     document.getElementById("successMsg").style.color = "green";
     document.getElementById("successMsg").style.fontSize = "1rem";
 
@@ -91,21 +96,6 @@ function setSuccessFor(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control success";
 }
-
-//Success Message disaplyed after validation
-// function successMsg() {
-//   if (username.value !== "" && messageValue !== "" && emailValue !== "") {
-//     document.getElementById("successMsg").style.color = "green";
-//     document.getElementById("successMsg").style.fontSize = "1rem";
-
-//     document.getElementById("successMsg").innerHTML =
-//       "Dear " +
-//       username.value +
-//       ", Thank you for your inquiry. One of our team members will be in touch with you shortly";
-//   } else {
-//     // alert("Fulfill the required value");
-//   }
-// }
 
 //Function to check is the entered email is valid or not
 
