@@ -68,15 +68,16 @@ function removeAllBooks() {
 
 //Send the book list
 function sendBooks() {
-  if (booksFromLocalStorage.length === 0) {
-    alert(
-      "Your order cannot be processed as your shopping cart is empty. Please select at least one book"
-    );
-  } else if (booksFromLocalStorage.length !== 0) {
+  if (!booksFromLocalStorage.length == 0) {
     alert(
       "“Thank you for your order. We have received it and will process your order soon"
     );
+
+    //Clear the local storage
     localStorage.clear();
+    //Rleoad the page
     location.reload();
+  } else {
+    alert("The cart is empty");
   }
 }

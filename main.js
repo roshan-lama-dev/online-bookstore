@@ -104,19 +104,8 @@ const book_library = [
   },
 ];
 
-var cartqunatity;
-//Creating an array for the selected books
-var selectedBooks = new Array();
-
-!localStorage.getItem("cartItems") && localStorage.setItem("cartItems", []);
-
-//Creating an array for the book information gained from the local storage
-
-//Creating an array to append all the array selected from the cart
-var appendCartArray = new Array();
 var booksFromLocalStorage = new Array();
 var booksinLocalStorage = new Array();
-var bookIdFromStorage;
 
 const displayBookList = () => {
   console.log(book_library.length);
@@ -189,47 +178,4 @@ function addToStorage(i) {
   }
   console.log(fromLocalStoreage);
   localStorage.setItem("cartItems", JSON.stringify(fromLocalStoreage));
-  // if (booksinLocalStorage.length === 0) {
-  //   if (typeof Storage !== "undefined") {
-  //     booksinLocalStorage = localStorage.setObj(
-  //       "selectedBooks",
-  //       book_library[id - 1]
-  //     );
-  //     if (localStorage.getItem("quantitybooks") == null) {
-  //       localStorage.setItem("quantitybooks", quantity + 1);
-  //     } else if (localStorage.getItem("qunatitybooks") !== null) {
-  //       localStorage.setItem("quantitybooks", quantity + 1);
-  //     }
-  //   } else {
-  //     alert("Cant support");
-  //   }
-  // } else if (!booksinLocalStorage.length) {
-  //   if (typeof Storage !== "undefined") {
-  //     appendCartArray = booksinLocalStorage.concat(
-  //       localStorage.setObj("selectedBooks", book_library[id - 1])
-  //     );
-  //     localStorage.setObj("selectedBooks", appendCartArray);
-  //     if (localStorage.getItem("quantitybooks") == null) {
-  //       localStorage.setItem("quantitybooks", quantity + 1);
-  //     } else if (localStorage.getItem("qunatitybooks") !== null) {
-  //       localStorage.setItem("quantitybooks", quantity + 1);
-  //     }
-  //     //code for quantity
-  //     //alert(selectedBooks_text);
-  //     // console.log(booksinLocalStorage.length);
-  //     // displaySelectedBooks();
-  //   } else {
-  //     alert("Cant support");
-  //   }
-  // }
 }
-
-// function displaySelectedBooks() {
-//   //get the local storage
-//   if (typeof (Storage !== "undefined")) {
-//     booksFromLocalStorage = localStorage.getObj("selectedBooks");
-//   }
-//   //push the ids of the books into array
-
-//   console.log(booksFromLocalStorage);
-// }
